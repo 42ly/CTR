@@ -9,7 +9,7 @@ Now you have to make it out and save humanity by solving puzzles put in place fo
 - Make the puzzle system. Essentially just have a puzzle tile that the user can interact with that changes scenes.
   - Memory puzzles
   - Reaction time puzzles
-  - Arithmetic puzzles
+  - ~~Arithmetic puzzles~~
   - Aim puzzles
 - Inventory system
   - Ability slot
@@ -20,3 +20,9 @@ Now you have to make it out and save humanity by solving puzzles put in place fo
   - need to cast out vision cones from the player and other enemies
 - Boss fight systems
 - Saving system
+- ~~Movement system~~
+- ~~Enemy movement system~~
+- ~~Projectile system~~
+- ~~Player and enemy stats system~~
+
+
