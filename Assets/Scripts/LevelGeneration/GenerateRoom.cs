@@ -8,7 +8,8 @@ public class GenerateRoom : MonoBehaviour
     private Tilemap floorTilemap, wallTilemap;
     private Tile floor, wall;
     private GameObject playerInstance, playerPrefab, portalInstance, portalPrefab,
-        ronnyRimsInstance, ronnyRimsPrefab, demonPrefab;
+        demonPrefab, demonInstance, detectorInstance;
+    public GameObject detectorPrefab, meleeConePrefab;
     private LevelData levelData;
 
     private void Start()
@@ -18,8 +19,6 @@ public class GenerateRoom : MonoBehaviour
         wallTilemap = levelData.wallTilemap;
         floor = levelData.floor;
         wall = levelData.wall;
-        ronnyRimsPrefab = levelData.ronnyRimsPrefab;
-        portalPrefab = levelData.portalPrefab;
         playerPrefab = levelData.playerPrefab;
         playerInstance = levelData.playerInstance;
         demonPrefab = levelData.demonPrefab;
@@ -52,7 +51,7 @@ public class GenerateRoom : MonoBehaviour
         Vector3Int rightCorner = new Vector3Int(roomOrigin.x + roomWidth, roomOrigin.y, 0);
         Vector3Int upperRightCorner = new Vector3Int(roomOrigin.x + roomWidth, rightCorner.y + roomHeight, 0);
         Vector3Int upperLeftCorner = new Vector3Int(roomOrigin.x, roomOrigin.y + roomHeight, 0);
-        Vector3Int playerPosition, ronnyRimsPosition, roomCenter, demonPosition;
+        Vector3Int playerPosition, roomCenter, demonPosition;
 
         CollisionFlag = IsColliding(roomOrigin, roomWidth, roomHeight);
         if (CollisionFlag == false)
@@ -85,12 +84,10 @@ public class GenerateRoom : MonoBehaviour
                 for(int i = 0; i < numEnemies; i += 1)
                 {
                     demonPosition = new Vector3Int(Random.Range(roomOrigin.x + 2, roomOrigin.x + roomWidth - 2), Random.Range(roomOrigin.y + 2, roomOrigin.y + roomHeight - 2), 0);
-                    Instantiate(demonPrefab, demonPosition, Quaternion.identity);
-                }
-                if(spawnRonnyRims)
-                {
-                    ronnyRimsPosition = new Vector3Int(Random.Range(roomOrigin.x + 2, roomOrigin.x + roomWidth - 2), Random.Range(roomOrigin.y + 2, roomOrigin.y + roomHeight - 2), 0);
-                    ronnyRimsInstance = Instantiate(ronnyRimsPrefab, ronnyRimsPosition, Quaternion.identity);
+                    demonInstance = Instantiate(demonPrefab, demonPosition, Quaternion.identity);
+                    detectorInstance = Instantiate(detectorPrefab, demonPosition, Quaternion.identity);
+                    detectorInstance.GetComponent<DetectorLogic>().demonInstance = demonInstance;
+                    demonInstance.GetComponent<EnemyData>().detector = detectorInstance;
                 }
                 if (spawnPortal)
                 {

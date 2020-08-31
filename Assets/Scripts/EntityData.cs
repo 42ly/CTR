@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class EntityData : MonoBehaviour
 {
-    public float headHP, torsoHP, leftArmHP, rightArmHP, leftLegHP, rightLegHP;
-    public float blood;
-    public bool isBleeding;
+    private int health = 100;
 
-    private void Start()
+    public void damageEntity(int damage)
     {
-        blood = 1.0f;
-        isBleeding = false;
+        health -= damage;
+    }
+    public int getHealth()
+    {
+        return health;
+    }
+    private void Update()
+    {
+        if(health <= 0)
+        {
+            if(this.gameObject.tag == "Enemy")
+            {
+                Destroy(GetComponent<EnemyData>().detector);
+            }
+            Destroy(this.gameObject);
+        }
     }
 }

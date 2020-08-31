@@ -10,24 +10,21 @@ public class MenuLogic : MonoBehaviour
     public Button backButton;
     public Button mainMenuButton;
     public Button saveButton;
-    public Text headHP;
-    public Text torsoHP;
-    public Text leftLegHP;
-    public Text rightLegHP;
-    public Text rightArmHP;
-    public Text leftArmHP;
-
-    private void updateHP()
+    public Button randomTask;
+    public Text health;
+    public Text electricity;
+    public bool doingTask;
+    private void loadRandomTask()
     {
-        LevelData levelData = GameObject.Find("GameManager").GetComponent<LevelData>();
-        if (levelData.playerInstance)
+        if (doingTask == true)
         {
-            headHP.text = levelData.playerInstance.GetComponent<EntityData>().headHP.ToString();
-            torsoHP.text = levelData.playerInstance.GetComponent<EntityData>().torsoHP.ToString();
-            leftArmHP.text = levelData.playerInstance.GetComponent<EntityData>().leftArmHP.ToString();
-            rightArmHP.text = levelData.playerInstance.GetComponent<EntityData>().rightArmHP.ToString();
-            leftLegHP.text = levelData.playerInstance.GetComponent<EntityData>().leftLegHP.ToString();
-            rightLegHP.text = levelData.playerInstance.GetComponent<EntityData>().rightLegHP.ToString();
+            GetComponent<Tasks>().arithmeticTaskUI.gameObject.SetActive(false);
+            doingTask = false;
+        }
+        else
+        {
+            doingTask = true;
+            GameObject.Find("GameManager").GetComponent<Tasks>().loadTask(0);
         }
     }
     private void loadMainMenu()
@@ -50,9 +47,11 @@ public class MenuLogic : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+        doingTask = false;
         pauseMenu.gameObject.SetActive(false);
         mainMenuButton.onClick.AddListener(loadMainMenu);
         backButton.onClick.AddListener(backToGame);
+        randomTask.onClick.AddListener(loadRandomTask);
     }
     private void Update()
     {
@@ -60,6 +59,7 @@ public class MenuLogic : MonoBehaviour
         {
             backToGame();
         }
-        updateHP();
+        electricity.text = "Electricity: " + GetComponent<LevelData>().playerInstance.GetComponent<PlayerData>().electricity.ToString();
+        health.text = "Health: " + GetComponent<LevelData>().playerInstance.GetComponent<EntityData>().getHealth().ToString();
     }
 }
