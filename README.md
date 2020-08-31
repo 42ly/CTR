@@ -17,7 +17,6 @@ Now you have to make it out and save humanity by solving puzzles put in place fo
   - Off hand slot
   - Feet augmentation slot
 - Vision system
-  - need to cast out vision cones from the player and other enemies
 - Boss fight systems
 - Saving system
 - ~~Movement system~~
