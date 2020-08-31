@@ -24,5 +24,5 @@ Now you have to make it out and save humanity by solving puzzles put in place fo
 - ~~Enemy movement system~~
 - ~~Projectile system~~
 - ~~Player and enemy stats system~~
-
+- ~~Procedural dungeon generation~~
 
