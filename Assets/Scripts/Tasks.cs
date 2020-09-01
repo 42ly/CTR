@@ -40,14 +40,7 @@ public class Tasks : MonoBehaviour
         }
         if(correctProblems >= 10)
         {
-            if(GetComponent<LevelData>().playerInstance.GetComponent<PlayerData>().electricity + 50 > 200)
-            {
-                GetComponent<LevelData>().playerInstance.GetComponent<PlayerData>().electricity = 200;
-            }
-            else
-            {
-                GetComponent<LevelData>().playerInstance.GetComponent<PlayerData>().electricity += 50;
-            }
+            GetComponent<LevelData>().playerInstance.GetComponent<PlayerData>().electricity = 200;
             correctProblems = 0;
             arithmeticTaskUI.gameObject.SetActive(false);
             GameObject.Find("GameManager").GetComponent<MenuLogic>().doingTask = false;

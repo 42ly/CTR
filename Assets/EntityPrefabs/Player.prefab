@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a94aae6d600c31458679083b3579ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 0
 --- !u!95 &4154478336848049410
 Animator:
   serializedVersion: 3
@@ -181,7 +182,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -2000742096073779186, guid: 6d64612de0342924fa3baa360a788577,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

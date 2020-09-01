@@ -14,7 +14,7 @@ public class MenuLogic : MonoBehaviour
     public Text health;
     public Text electricity;
     public bool doingTask;
-    private void loadRandomTask()
+    public void loadRandomTask()
     {
         if (doingTask == true)
         {

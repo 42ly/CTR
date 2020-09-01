@@ -6,11 +6,13 @@ using UnityEngine.Tilemaps;
 public class GenerateRoom : MonoBehaviour
 {
     private Tilemap floorTilemap, wallTilemap;
+    public Tilemap taskTilemap;
     private Tile floor, wall;
     private GameObject playerInstance, playerPrefab, portalInstance, portalPrefab,
         demonPrefab, demonInstance, detectorInstance;
     public GameObject detectorPrefab, meleeConePrefab;
     private LevelData levelData;
+    public Tile task;
 
     private void Start()
     {
@@ -52,6 +54,7 @@ public class GenerateRoom : MonoBehaviour
         Vector3Int upperRightCorner = new Vector3Int(roomOrigin.x + roomWidth, rightCorner.y + roomHeight, 0);
         Vector3Int upperLeftCorner = new Vector3Int(roomOrigin.x, roomOrigin.y + roomHeight, 0);
         Vector3Int playerPosition, roomCenter, demonPosition;
+        Vector3Int taskPosition;
 
         CollisionFlag = IsColliding(roomOrigin, roomWidth, roomHeight);
         if (CollisionFlag == false)
@@ -59,6 +62,7 @@ public class GenerateRoom : MonoBehaviour
             numEnemies = Random.Range(1, 6);
             for (int y = roomOrigin.y; y <= roomOrigin.y + roomHeight; y += 1)
             {
+                taskPosition = new Vector3Int(Random.Range(roomOrigin.x, roomOrigin.x + roomWidth), Random.Range(roomOrigin.y, roomOrigin.y + roomHeight), 0);
                 for (int x = roomOrigin.x; x <= roomOrigin.x + roomWidth; x += 1)
                 {
                     Vector3Int currentPositon = new Vector3Int(x, y, 0);
@@ -66,6 +70,10 @@ public class GenerateRoom : MonoBehaviour
                         currentPositon.y == roomOrigin.y || currentPositon.y == roomOrigin.y + roomHeight)
                     {
                         wallTilemap.SetTile(currentPositon, wall);
+                    }
+                    else if(currentPositon == taskPosition)
+                    {
+                        taskTilemap.SetTile(taskPosition, task);
                     }
                     else
                     {
@@ -89,11 +97,11 @@ public class GenerateRoom : MonoBehaviour
                     detectorInstance.GetComponent<DetectorLogic>().demonInstance = demonInstance;
                     demonInstance.GetComponent<EnemyData>().detector = detectorInstance;
                 }
-                if (spawnPortal)
+                /*if (spawnPortal)
                 {
                     Vector3Int portalPosition = new Vector3Int(Random.Range(roomOrigin.x + 2, roomOrigin.x + roomWidth - 2), Random.Range(roomOrigin.y + 2, roomOrigin.y + roomHeight - 2), 0);
                     portalInstance = Instantiate(portalPrefab, portalPosition, Quaternion.identity);
-                }
+                }*/
             }
             roomCenter = new Vector3Int(roomOrigin.x + (roomWidth / 2), roomOrigin.y + (roomHeight / 2), 0);
         }
