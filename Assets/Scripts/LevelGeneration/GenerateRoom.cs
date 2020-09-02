@@ -11,6 +11,7 @@ public class GenerateRoom : MonoBehaviour
     private GameObject playerInstance, playerPrefab, portalInstance, portalPrefab,
         demonPrefab, demonInstance, detectorInstance;
     public GameObject detectorPrefab, meleeConePrefab;
+    private List<GameObject> demonInstances, detectorInstances;
     private LevelData levelData;
     public Tile task;
 
@@ -24,6 +25,8 @@ public class GenerateRoom : MonoBehaviour
         playerPrefab = levelData.playerPrefab;
         playerInstance = levelData.playerInstance;
         demonPrefab = levelData.demonPrefab;
+        demonInstances = levelData.demonInstances;
+        detectorInstances = levelData.detectorInstances;
     }
     private bool IsColliding(Vector3Int origin, int roomWidth, int roomHeight)
     {
@@ -96,6 +99,9 @@ public class GenerateRoom : MonoBehaviour
                     detectorInstance = Instantiate(detectorPrefab, demonPosition, Quaternion.identity);
                     detectorInstance.GetComponent<DetectorLogic>().demonInstance = demonInstance;
                     demonInstance.GetComponent<EnemyData>().detector = detectorInstance;
+                    demonInstances.Add(demonInstance);
+                    detectorInstances.Add(detectorInstance);
+                
                 }
                 /*if (spawnPortal)
                 {

@@ -10,9 +10,11 @@ public class MenuLogic : MonoBehaviour
     public Button backButton;
     public Button mainMenuButton;
     public Button saveButton;
-    public Button randomTask;
+    public Button randomTaskButton;
+    public Button iterateDungeonButton;
     public Text health;
     public Text electricity;
+    public Text gamesLeft;
     public bool doingTask;
     public void loadRandomTask()
     {
@@ -44,6 +46,11 @@ public class MenuLogic : MonoBehaviour
             pauseMenu.gameObject.SetActive(true);
         }
     }
+    private void iterateDungeon()
+    {
+        GetComponent<LevelData>().removeAllInstances();
+        GetComponent<GenerateMap>().generateMap();
+    }
     private void Start()
     {
         Time.timeScale = 1;
@@ -51,7 +58,8 @@ public class MenuLogic : MonoBehaviour
         pauseMenu.gameObject.SetActive(false);
         mainMenuButton.onClick.AddListener(loadMainMenu);
         backButton.onClick.AddListener(backToGame);
-        randomTask.onClick.AddListener(loadRandomTask);
+        randomTaskButton.onClick.AddListener(loadRandomTask);
+        iterateDungeonButton.onClick.AddListener(iterateDungeon);
     }
     private void Update()
     {

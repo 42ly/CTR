@@ -28,6 +28,9 @@ public class DetectorLogic : MonoBehaviour
     }
     private void Update()
     {
-        transform.position = demonInstance.transform.position;
+        if (demonInstance)
+            transform.position = demonInstance.transform.position;
+        else
+            Destroy(this.gameObject);
     }
 }

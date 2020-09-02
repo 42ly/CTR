@@ -3,6 +3,7 @@ using System.Data;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class GenerateMap : MonoBehaviour
 {
@@ -10,8 +11,15 @@ public class GenerateMap : MonoBehaviour
     {
         generateMap();
     }
-    private void generateMap()
+    private void clearMap()
     {
+        GetComponent<LevelData>().wallTilemap.ClearAllTiles();
+        GetComponent<LevelData>().floorTilemap.ClearAllTiles();
+        GetComponent<GenerateRoom>().taskTilemap.ClearAllTiles();
+    }
+    public void generateMap()
+    {
+        clearMap();
         List<Vector3Int> roomCenters = new List<Vector3Int>();
         Vector3Int roomCenter;
         bool doSpawnPlayer = false, doSpawnRonnyRims = false, doSpawnPortal = false;

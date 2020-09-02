@@ -13,9 +13,13 @@ public class TaskCollision : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && GameObject.Find("GameManager").GetComponent<MenuLogic>().doingTask)
         {
             GameObject.Find("GameManager").GetComponent<MenuLogic>().loadRandomTask();
+        }
+        else if(collision.gameObject.tag == "Player" && GameObject.Find("GameManager").GetComponent<MenuLogic>().doingTask == false)
+        {
+
         }
     }
 }

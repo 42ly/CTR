@@ -7,8 +7,9 @@ public class Tasks : MonoBehaviour
     public Canvas arithmeticTaskUI;
     public Text problemText;
     public InputField solution;
-    private bool onTask;
+    public bool onTask;
     private int correctProblems, answer;
+    public Text gamesLeft;
     private void arithmeticTask()
     {
         arithmeticTaskUI.gameObject.SetActive(true);
@@ -26,6 +27,7 @@ public class Tasks : MonoBehaviour
     }
     private void Start()
     {
+        gamesLeft.text = "Problems left: 10";
         correctProblems = 0;
         answer = 0;
         arithmeticTaskUI.gameObject.SetActive(false);
@@ -45,5 +47,6 @@ public class Tasks : MonoBehaviour
             arithmeticTaskUI.gameObject.SetActive(false);
             GameObject.Find("GameManager").GetComponent<MenuLogic>().doingTask = false;
         }
+        gamesLeft.text = "Problems left: " + (10 - correctProblems).ToString();
     }
 }
